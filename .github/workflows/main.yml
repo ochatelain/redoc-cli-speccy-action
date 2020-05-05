@@ -1,0 +1,31 @@
+on: [push]
+
+jobs:
+  hello_world_job_public:
+    runs-on: ubuntu-latest
+    name: A job to say hello publically
+    steps:
+    - name: Hello world action step
+      id: hello
+      uses: therealagentk/hello-world-docker-action@1.0.0
+      with:
+        who-to-greet: 'Kai'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+  hello_world_job_private:
+    runs-on: ubuntu-latest
+    name: A job to say hello privately
+    steps:
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        id: hello
+        with:
+          who-to-greet: 'Kai privately'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
