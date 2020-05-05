@@ -10,17 +10,13 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: therealagentk/hello-world-docker-action@1.0.5
+      uses: therealagentk/hello-world-docker-action@1.0.6
       with:
         who-to-greet: 'Kai'
 
     # Use the output from the `hello` step
     - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
-
-    # Versions
-    - name: redoc-cli version display
-      run: redoc-cli --version
 
   hello_world_job_private:
     runs-on: ubuntu-latest
@@ -41,6 +37,3 @@ jobs:
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
 
-      # Versions
-      - name: redoc-cli version display
-        run: redoc-cli --version

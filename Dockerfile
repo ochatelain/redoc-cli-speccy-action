@@ -2,8 +2,9 @@
 #FROM alpine:3.10
 FROM node:alpine
 
-# Install redoc-cli
+# Install npms
 RUN ["npm", "install", "-g", "redoc-cli"]
+RUN ["npm", "install", "-g", "speccy"]
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
