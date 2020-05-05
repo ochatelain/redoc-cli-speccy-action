@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: therealagentk/hello-world-docker-action@1.0.4
+      uses: therealagentk/hello-world-docker-action@1.0.5
       with:
         who-to-greet: 'Kai'
 
@@ -26,14 +26,21 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello privately
     steps:
-      # To use this repository's private action, you must check out the repository
+
+      # To use the repository's private action, you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
+      
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Kai privately'
+
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+      # Versions
+      - name: redoc-cli version display
+        run: redoc-cli --version
