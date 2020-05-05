@@ -20,7 +20,7 @@ jobs:
 
     # Versions
     - name: redoc-cli version display
-      run: echo redoc-cli --version
+      run: redoc-cli --version
 
   hello_world_job_private:
     runs-on: ubuntu-latest
