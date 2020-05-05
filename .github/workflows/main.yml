@@ -10,9 +10,10 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: therealagentk/hello-world-docker-action@1.0.6
+      uses: therealagentk/hello-world-docker-action@1.0.7
       with:
         who-to-greet: 'Kai'
+        redoc-args: 'bundle master.yaml -o output-cupidmedia-master.html'
 
     # Use the output from the `hello` step
     - name: Get the output time
