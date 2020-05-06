@@ -7,7 +7,10 @@ echo "::set-output name=time::$time"
 cd /github/workspace
 
 echo "redoc-cli version: $(redoc-cli --version)"
-echo "speccy version: $(speccy --version)"
-
-echo $1
 echo $2
+redoc-cli $2
+
+echo "speccy version: $(speccy --version)"
+echo $3
+speccy $3
+

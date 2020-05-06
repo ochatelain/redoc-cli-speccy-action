@@ -8,20 +8,28 @@ jobs:
     name: A job to say hello publically
 
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: therealagentk/hello-world-docker-action@1.0.7
-      with:
-        who-to-greet: 'Kai'
-        redoc-args: 'bundle master.yaml -o output-cupidmedia-master.html'
 
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Hello world action step
+        id: hello
+        uses: therealagentk/hello-world-docker-action@1.0.8
+        with:
+          who-to-greet: 'Kai'
+          redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
+          speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
+
+      - name: check result
+        run: |
+          ls -al
+          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing redoc-output-petstore.html from previous step." && exit 1)
+
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
 
   hello_world_job_private:
     runs-on: ubuntu-latest
     name: A job to say hello privately
+    
     steps:
 
       # To use the repository's private action, you must check out the repository
@@ -33,6 +41,13 @@ jobs:
         id: hello
         with:
           who-to-greet: 'Kai privately'
+          redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
+          speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
+
+      - name: check result
+        run: |
+          ls -al
+          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing redoc-output-petstore.html from previous step." && exit 1)
 
       # Use the output from the `hello` step
       - name: Get the output time
