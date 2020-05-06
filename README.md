@@ -1,21 +1,21 @@
-# hello-world-docker-action
+# redoc-cli-speccy-action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+Simple GH action to run redoc-cli and speccy in a container
 
 ## Inputs
 
-### `who-to-greet`
+### `redoc-args`
 
-**Required** The name of the person to greet. Default `"World"`.
+Example:
 
-## Outputs
+``` 
+redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
+```
 
-### `time`
+### `speccy-args`
 
-The time we greeted you.
+Example:
 
-## Example usage
-
-uses: actions/hello-world-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+```
+speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
+```
