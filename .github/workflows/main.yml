@@ -5,44 +5,41 @@ on:
 jobs:
   hello_world_job_public:
     runs-on: ubuntu-latest
-    name: A job to say hello publically
+    name: test task public run
 
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Hello world action step
-        id: hello
-        uses: therealagentk/hello-world-docker-action@1.0.9
+      - name: Redoc and Speccy petstore.yml
+        id: redoc_speccy_petstore
+        uses: therealagentk/hello-world-docker-action@1.1.0
         with:
-          who-to-greet: 'Kai'
           redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
           speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
 
-      - name: check result
+      - name: Check result
         run: |
           ls -al
           (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing an output file from previous step." && exit 1)
 
-      # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "The time was ${{ steps.redoc_speccy_petstore.outputs.time }}"
 
   hello_world_job_private:
     runs-on: ubuntu-latest
-    name: A job to say hello privately
+    name: test task private run
     
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
       
-      - name: Hello world action step
+      - name: Redoc and Speccy petstore.yml
+        id: redoc_speccy_petstore
         uses: ./ # Uses an action in the root directory
-        id: hello
         with:
-          who-to-greet: 'Kai privately'
           redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
           speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
 
@@ -51,7 +48,6 @@ jobs:
           ls -al
           (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing an output file from previous step." && exit 1)
 
-      # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "The time was ${{ steps.redoc_speccy_petstore.outputs.time }}"
 
