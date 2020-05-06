@@ -7,8 +7,11 @@ inputs:
     required: true
     default: 'World'
   redoc-args:
-      description: 'Arguments for redoc'
-      required: false
+    description: 'Arguments for redoc'
+    required: false
+  speccy-args:
+    description: 'Arguments for speccy'
+    required: false
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -18,3 +21,4 @@ runs:
   args:
     - ${{ inputs.who-to-greet }}
     - ${{ inputs.redoc-args }}
+    - ${{ inputs.speccy-args }}

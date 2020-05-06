@@ -4,7 +4,11 @@ echo "Hello $1"
 time=$(date)
 echo "::set-output name=time::$time"
 
+ls -al
+
 cd /github/workspace
+
+ls -al
 
 echo "redoc-cli version: $(redoc-cli --version)"
 echo $2

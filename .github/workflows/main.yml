@@ -9,9 +9,12 @@ jobs:
 
     steps:
 
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Hello world action step
         id: hello
-        uses: therealagentk/hello-world-docker-action@1.0.8
+        uses: therealagentk/hello-world-docker-action@1.0.9
         with:
           who-to-greet: 'Kai'
           redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
@@ -20,7 +23,7 @@ jobs:
       - name: check result
         run: |
           ls -al
-          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing redoc-output-petstore.html from previous step." && exit 1)
+          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing an output file from previous step." && exit 1)
 
       # Use the output from the `hello` step
       - name: Get the output time
@@ -32,7 +35,6 @@ jobs:
     
     steps:
 
-      # To use the repository's private action, you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
       
@@ -47,7 +49,7 @@ jobs:
       - name: check result
         run: |
           ls -al
-          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing redoc-output-petstore.html from previous step." && exit 1)
+          (test -f redoc-output-petstore.html && test -f speccy-output-petstore.yml) || (echo "Missing an output file from previous step." && exit 1)
 
       # Use the output from the `hello` step
       - name: Get the output time
