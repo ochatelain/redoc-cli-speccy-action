@@ -14,7 +14,7 @@ jobs:
 
       - name: Redoc and Speccy petstore.yml
         id: redoc_speccy_petstore
-        uses: therealagentk/redoc-cli-speccy-action@1.2.1
+        uses: therealagentk/redoc-cli-speccy-action@1.3.0
         with:
           redoc-args: 'bundle test/petstore.yml -o redoc-output-petstore.html'
           speccy-args: 'resolve -o speccy-output-petstore.yml test/petstore.yml'
